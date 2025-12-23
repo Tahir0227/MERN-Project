@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 
 //login
-router.post('/login', (req,res) => {
+router.post('/auth/login', (req,res) => {
     const {email, password} = req.body
     const hashPass = cryptojs.SHA224(password).toString()
     const sql = 'SELECT * FROM users WHERE emial = ? and password = ?'
@@ -24,11 +24,11 @@ router.post('/login', (req,res) => {
 
             const user = data[0]
             const payload = {
+                emial : user.emial,
                 role : user.role
             }
             const token = jwt.sign(payload, config.SECRET)
             const userData = {
-                email : user.emial,
                 token
             }
 
@@ -37,5 +37,20 @@ router.post('/login', (req,res) => {
     })
 })
 
+router.post('/auth/sign-up', (req, res) => {
+    const{emial, password} = req.body
+    const sql = 'INSERT INTO users(emial, password, role) VALUES(?,?,?)'
+
+    pool.query(sql, [emial, password,'student'], (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
+
+router.get('/courses/all-active-courses', (req, res) => {
+    const sql = 'SELECT * FROM course WHERE CURDATE() < start_date;'
+    pool.query(sql, (error,data) => {
+        res.send(result.createResult(error, data))
+    })
+})
 
 module.exports = router
