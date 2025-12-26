@@ -4,6 +4,14 @@ const result = require('../utils/result')
 
 const router = express.Router()
 
+// router.post('/register-to-course', (req, res) => {
+//     const {name, email, course_id, mobile_no} = req.body
+//     const sql = 'INSERT INTO student(name, emial, course_id, mobile_no) VALUES(?,?,?,?)'
+//     pool.query(sql1, [name, email, course_id, mobile_no] ,(error,data) => {
+//         res.send(result.createResult(error, data))
+//     })
+// })
+
 router.post('/register-to-course', (req, res) => {
     const {name, email, course_id, mobile_no} = req.body
 
