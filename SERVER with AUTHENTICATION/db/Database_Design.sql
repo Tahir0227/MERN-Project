@@ -1,3 +1,6 @@
+CREATE DATABASE sunbeam1;
+USE sunbeam1;
+
 CREATE TABLE users(
     emial varchar(20),
     password varchar(20),
