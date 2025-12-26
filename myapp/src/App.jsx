@@ -1,17 +1,26 @@
-import { Route, Routes } from "react-router"
+import { Navigate, Route, Routes } from "react-router"
 import { ToastContainer } from 'react-toastify'
 
 import Login from "./Pages/Login"
 import Home from "./Pages/Home"
+import Profile from "./Pages/Profile"
+import { createContext, useState } from "react"
 
-// functional componentsy
+export const LoginContext = createContext()
+
 function App() {
+
+  const [loginStatus, setLoginStatus] = useState(false)
+
   return (
     <>
-      <Routes>
-        <Route path="/*" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
+      <LoginContext.Provider value={{ loginStatus, setLoginStatus }}>
+        <Routes>
+          <Route path="/*" element={<Login />} />
+          <Route path="/home" element={loginStatus ? <Home /> : <Navigate to='/' />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </LoginContext.Provider>
       <ToastContainer />
     </>
   )
