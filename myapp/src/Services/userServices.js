@@ -1,11 +1,13 @@
-import React from 'react'
+import axios from "axios";
+import config from "./Config";
 
-function userServices() {
-    return (
-        <div>
+export async function loginUser(email, password) {
+    const url = config.BASE_URL + '/auth/login'
+    const body = { email, password }
 
-        </div>
-    )
+    const response = await axios.post(url, body)
+    return response.data
 }
 
-export default userServices
+
+

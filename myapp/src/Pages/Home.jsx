@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
+import { getAllActiveCourses } from '../Services/Courses'
 
 function Home() {
 
@@ -33,32 +34,28 @@ function Home() {
                 {/* ================= Achievements ================= */}
                 <div className="max-w-6xl mx-auto mb-24">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
-
                         <div className="bg-white rounded-xl shadow-md p-6">
                             <h3 className="text-3xl font-bold text-emerald-600">10+</h3>
                             <p className="mt-2 text-gray-600">Years Experience</p>
                         </div>
-
                         <div className="bg-white rounded-xl shadow-md p-6">
                             <h3 className="text-3xl font-bold text-emerald-600">5000+</h3>
                             <p className="mt-2 text-gray-600">Students Trained</p>
                         </div>
-
                         <div className="bg-white rounded-xl shadow-md p-6">
                             <h3 className="text-3xl font-bold text-emerald-600">100+</h3>
                             <p className="mt-2 text-gray-600">Expert Trainers</p>
                         </div>
-
                         <div className="bg-white rounded-xl shadow-md p-6">
                             <h3 className="text-3xl font-bold text-emerald-600">90%</h3>
                             <p className="mt-2 text-gray-600">Placement Success</p>
                         </div>
 
-                    </div>
-                </div>
+                    </div >
+                </div >
 
                 {/* ================= Moving Photos ================= */}
-                <div className="max-w-6xl mx-auto mb-24">
+                < div className="max-w-6xl mx-auto mb-24" >
                     <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
                         Our Campus & Events
                     </h2>
@@ -92,10 +89,10 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </ >
 
                 {/* ================= Courses ================= */}
-                <div className="max-w-7xl mx-auto">
+                < div className="max-w-7xl mx-auto" >
                     <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">
                         Our Courses
                     </h2>
@@ -128,14 +125,15 @@ function Home() {
                                             View More →
                                         </button>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
+                                </div >
+                            </div >
+                        ))
+                        }
 
-                    </div>
-                </div>
+                    </div >
+                </ >
 
-            </div>
+            </div >
         </>
     )
 }
