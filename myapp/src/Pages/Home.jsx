@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
-import { getAllActiveCourses } from '../Services/Courses'
+import { getAllActiveCourses } from '../Services/userServices'
 
 function Home() {
 
@@ -93,10 +93,20 @@ function Home() {
 
                                     {/* Dates */}
                                     <p className="text-sm text-gray-600">
-                                        Start: {course.start_date}
+                                        Start: {new Date(course.start_date).toLocaleDateString("en-GB", {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric"
+                                        })}
+
                                     </p>
                                     <p className="text-sm text-gray-600">
-                                        End: {course.end_date}
+                                        End: {new Date(course.end_date).toLocaleDateString("en-GB", {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric"
+                                        })}
+
                                     </p>
 
                                     {/* Button */}

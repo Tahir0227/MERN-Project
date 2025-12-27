@@ -9,5 +9,10 @@ export async function loginUser(email, password) {
     return response.data
 }
 
+export async function getAllActiveCourses() {
+    const url = config.BASE_URL + '/courses/all-active-courses'
+    const response = await axios.get(url)
+    return response.data
+}
 
 
