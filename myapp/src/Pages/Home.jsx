@@ -18,8 +18,6 @@ function Home() {
         }
     }
 
-
-
     return (
         <>
             <Navbar />
@@ -70,60 +68,54 @@ function Home() {
                         {courses.map(course => (
                             <div
                                 key={course.Course_id}
-                                className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
+                                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
                             >
-                                <div className="absolute right-0 top-0 h-full w-32 bg-emerald-50 rounded-l-full"></div>
 
-                                <div className="relative p-6 flex flex-col h-full">
+                                {/* Course Image */}
+                                <div className="relative">
+                                    <img
+                                        src="https://via.placeholder.com/400x200"
+                                        alt="course"
+                                        className="w-full h-44 object-cover"
+                                    />
 
-                                    {/* Course Icon */}
-                                    <div className="text-5xl mb-4">📘</div>
+                                    <span className="absolute top-3 left-3 bg-emerald-500 text-white
+                                   text-xs font-semibold px-3 py-1 rounded-full">
+                                        Active
+                                    </span>
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-5 flex flex-col">
 
                                     {/* Course Name */}
-                                    <h3 className="text-xl font-semibold text-gray-800">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
                                         {course.course_name}
                                     </h3>
 
-                                    {/* Description */}
-                                    {/* <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-                                        {course.description}
-                                    </p> */}
-
-                                    {/* Fees */}
-                                    {/* <p className="text-sm text-gray-700 mt-2">
-                                        Fees: <span className="font-semibold">₹ {course.fees}</span>
-                                    </p> */}
-
-                                    {/* Dates */}
-                                    <p className="text-sm text-gray-600">
-                                        Start: {new Date(course.start_date).toLocaleDateString("en-GB", {
-                                            day: "2-digit",
-                                            month: "short",
-                                            year: "numeric"
-                                        })}
-
-                                    </p>
-
-                                    {/* <p className="text-sm text-gray-600">
-                                        End: {new Date(course.end_date).toLocaleDateString("en-GB", {
-                                            day: "2-digit",
-                                            month: "short",
-                                            year: "numeric"
-                                        })}
-
-                                    </p> */}
-
-                                    {/* Button */}
-                                    <div className="mt-auto pt-6">
-                                        <button
-                                            className="px-4 py-2 rounded-lg bg-emerald-500 text-white
-                                 font-semibold text-sm hover:bg-emerald-600 transition"
-                                            onClick={() => navigate(`/course-info/${course.Course_id}`)
-                                            }
-                                        >
-                                            View More →
-                                        </button>
+                                    {/* Start Date */}
+                                    <div className="flex items-center text-sm text-gray-600 gap-2 mb-6">
+                                        <span>📅</span>
+                                        <span>
+                                            Starts on{" "}
+                                            {new Date(course.start_date).toLocaleDateString("en-GB", {
+                                                day: "2-digit",
+                                                month: "short",
+                                                year: "numeric",
+                                            })}
+                                        </span>
                                     </div>
+
+                                    {/* View More Button */}
+                                    <button
+                                        className="w-full border border-emerald-500 text-emerald-600
+                               font-semibold py-2 rounded-lg
+                               hover:bg-emerald-50 transition"
+                                        onClick={() => navigate(`/course-info/${course.Course_id}`)}
+                                    >
+                                        View More →
+                                    </button>
+
                                 </div>
                             </div>
                         ))}

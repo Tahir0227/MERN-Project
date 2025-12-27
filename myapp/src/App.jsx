@@ -7,6 +7,7 @@ import Register from "./Pages/Register"
 import Profile from "./Pages/Profile"
 import { createContext, useState } from "react"
 import Courseinfo from "./Pages/Courseinfo"
+import MyCourses from "./Pages/MyCourses"
 
 export const LoginContext = createContext()
 
@@ -23,6 +24,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/course-info/:id" element={<Courseinfo />} />
+          <Route path="/my-course" element={<MyCourses />} />
+
 
         </Routes>
       </LoginContext.Provider>
