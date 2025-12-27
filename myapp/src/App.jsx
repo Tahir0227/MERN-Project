@@ -6,6 +6,7 @@ import Home from "./Pages/Home"
 import Register from "./Pages/Register"
 import Profile from "./Pages/Profile"
 import { createContext, useState } from "react"
+import Courseinfo from "./Pages/Courseinfo"
 
 export const LoginContext = createContext()
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/course-info" element={<Courseinfo />} />
         </Routes>
       </LoginContext.Provider>
       <ToastContainer />
