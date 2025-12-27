@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
 import { Link } from 'react-router'
+import { getCourseInfo } from '../Services/studentServices'
+import { useParams } from 'react-router'
 
 function Courseinfo() {
+
+    const { id } = useParams()
+
+    const [course, setCourse] = useState([])
+
+    useEffect(() => {
+        console.log("Course info component loaded")
+        getCourse()
+    }, [])
+
+    const getCourse = async () => {
+        const result = await getCourseInfo(id)
+        console.log(result)
+        if (result.status == "success") {
+            setCourse(result.data[0])
+        }
+    }
+
+
     return (
         <>
             <Navbar />
@@ -27,22 +48,37 @@ function Courseinfo() {
                         {/* RIGHT: Course Info */}
                         <div>
                             <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                                IIT-MERN-2025
+                                {course.course_name}
                             </h1>
 
                             <p className="text-gray-600 mb-6">
-                                MERN Stack Development
+                                {course.description}
                             </p>
 
                             <div className="space-y-3 text-gray-700">
-                                <p>
-                                    <span className="font-semibold">Start Date:</span> 10/12/2025
+                                <p className="text-sm text-gray-600">
+                                    <span className="font-semibold">Start:</span>
+                                    {new Date(course.start_date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    })}
+
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <span className="font-semibold">End:</span>
+                                    {new Date(course.end_date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    })}
+
                                 </p>
                                 <p>
-                                    <span className="font-semibold">End Date:</span> 05/01/2026
+                                    <span className="font-semibold">Video Expire Days:</span> {course.video_expire_days}
                                 </p>
                                 <p>
-                                    <span className="font-semibold">Fees:</span> ₹4000
+                                    <span className="font-semibold">Fees:</span> {course.fees}
                                 </p>
                             </div>
 

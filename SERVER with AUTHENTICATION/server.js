@@ -20,7 +20,7 @@ app.use("/", commonRouter)
 app.use("/student", studentRouter)
 
 app.listen(4000, 'localhost', (req, res) => {
-    console.log("Server started at 4000") 
+    console.log("Server started at 4000")
 })
 
 //nodemon server.js

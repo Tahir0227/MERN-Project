@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
 import { getAllActiveCourses } from '../Services/userServices'
+import { useNavigate } from 'react-router'
 
 function Home() {
-
+    const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -16,6 +17,8 @@ function Home() {
             setCourses(result.data)
         }
     }
+
+
 
     return (
         <>
@@ -66,7 +69,7 @@ function Home() {
 
                         {courses.map(course => (
                             <div
-                                key={course.id}
+                                key={course.Course_id}
                                 className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
                             >
                                 <div className="absolute right-0 top-0 h-full w-32 bg-emerald-50 rounded-l-full"></div>
@@ -82,14 +85,14 @@ function Home() {
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                                    {/* <p className="text-sm text-gray-600 mt-2 line-clamp-3">
                                         {course.description}
-                                    </p>
+                                    </p> */}
 
                                     {/* Fees */}
-                                    <p className="text-sm text-gray-700 mt-2">
+                                    {/* <p className="text-sm text-gray-700 mt-2">
                                         Fees: <span className="font-semibold">₹ {course.fees}</span>
-                                    </p>
+                                    </p> */}
 
                                     {/* Dates */}
                                     <p className="text-sm text-gray-600">
@@ -100,20 +103,23 @@ function Home() {
                                         })}
 
                                     </p>
-                                    <p className="text-sm text-gray-600">
+
+                                    {/* <p className="text-sm text-gray-600">
                                         End: {new Date(course.end_date).toLocaleDateString("en-GB", {
                                             day: "2-digit",
                                             month: "short",
                                             year: "numeric"
                                         })}
 
-                                    </p>
+                                    </p> */}
 
                                     {/* Button */}
                                     <div className="mt-auto pt-6">
                                         <button
                                             className="px-4 py-2 rounded-lg bg-emerald-500 text-white
                                  font-semibold text-sm hover:bg-emerald-600 transition"
+                                            onClick={() => navigate(`/course-info/${course.Course_id}`)
+                                            }
                                         >
                                             View More →
                                         </button>

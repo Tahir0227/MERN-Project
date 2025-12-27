@@ -19,7 +19,7 @@ router.post('/auth/login', (req, res) => {
         }
         else if (data.length == 0) {
             res.send(result.createResult('Invalid email or password'))
-            
+
         }
         else {
 
@@ -41,6 +41,14 @@ router.post('/auth/login', (req, res) => {
 router.get('/courses/all-active-courses', (req, res) => {
     const sql = 'SELECT * FROM course WHERE CURDATE() < start_date;'
     pool.query(sql, (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
+
+router.get('/courses/getInfo/:Course_id', (req, res) => {
+    const id = req.params.Course_id
+    const sql = 'SELECT * FROM course WHERE course_id = ? ;'
+    pool.query(sql, [id], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })
