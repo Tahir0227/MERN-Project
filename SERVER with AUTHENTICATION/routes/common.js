@@ -19,6 +19,7 @@ router.post('/auth/login', (req, res) => {
         }
         else if (data.length == 0) {
             res.send(result.createResult('Invalid email or password'))
+            
         }
         else {
 

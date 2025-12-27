@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
-const cors = require('cors')
+const cors = require("cors")
+
 
 const courseRouter = require('./routes/courses')
 const videosRouter = require('./routes/videos')
@@ -19,7 +20,7 @@ app.use("/", commonRouter)
 app.use("/student", studentRouter)
 
 app.listen(4000, 'localhost', (req, res) => {
-    console.log("Server started at 4000")
+    console.log("Server started at 4000") 
 })
 
 //nodemon server.js
