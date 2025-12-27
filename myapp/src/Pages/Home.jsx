@@ -4,6 +4,7 @@ import { getAllActiveCourses } from '../Services/userServices'
 import { useNavigate } from 'react-router'
 
 function Home() {
+
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
