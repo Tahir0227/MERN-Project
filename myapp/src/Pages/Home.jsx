@@ -55,7 +55,7 @@ function Home() {
                 </div >
 
                 {/* ================= Moving Photos ================= */}
-                < div className="max-w-6xl mx-auto mb-24" >
+                <div div className="max-w-6xl mx-auto mb-24" >
                     <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
                         Our Campus & Events
                     </h2>
@@ -89,7 +89,7 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                </ >
+                </div>
 
                 {/* ================= Courses ================= */}
                 < div className="max-w-7xl mx-auto" >
@@ -131,7 +131,7 @@ function Home() {
                         }
 
                     </div >
-                </ >
+                </  div >
 
             </div >
         </>
