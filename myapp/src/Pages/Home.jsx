@@ -4,6 +4,7 @@ import { getAllActiveCourses } from '../Services/userServices'
 import { useNavigate } from 'react-router'
 
 function Home() {
+
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
@@ -118,8 +119,7 @@ function Home() {
                                         <button
                                             className="px-4 py-2 rounded-lg bg-emerald-500 text-white
                                  font-semibold text-sm hover:bg-emerald-600 transition"
-                                            onClick={() => navigate(`/course-info/${course.Course_id}`)
-                                            }
+                                            onClick={() => navigate(`/course-info/${course.Course_id}`)}
                                         >
                                             View More →
                                         </button>

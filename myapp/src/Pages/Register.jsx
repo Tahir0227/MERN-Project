@@ -1,20 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { registerToCourse, getCourseInfo } from "../Services/studentServices";
+import { toast } from "react-toastify";
 
 export default function Register() {
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        mobile: "",
-    });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const navigate = useNavigate();
 
-    const register = (e) => {
+    const { id } = useParams()
+    const [course, setCourse] = useState([])
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [mobileNo, SetMobileNo] = useState('')
+
+    useEffect(() => {
+        console.log("register component loaded")
+        getCourse()
+    }, [])
+
+    const getCourse = async () => {
+        const result = await getCourseInfo(id)
+        console.log(result)
+        if (result.status == "success") {
+            setCourse(result.data[0])
+        }
+    }
+
+    const register = async (e) => {
         e.preventDefault();
-        console.log(formData);
-    };
+
+        if (name.trim() === '') {
+            toast.warn('name must be entered');
+        } else if (email.trim() === '') {
+            toast.warn('email must be entered');
+        } else if (mobileNo.trim() === '') {
+            toast.warn('mobile number must be entered');
+        }
+        else {
+            const result = await registerToCourse(name, email, id, mobileNo);
+            console.log(result)
+            if (result.status === 'success') {
+                toast.success('Register successful');
+                navigate('/home');
+            }
+            else {
+                toast.error('Already registerd to this course')
+            }
+        }
+    }
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-emerald-100 via-white to-blue-100 px-4">
@@ -32,7 +65,7 @@ export default function Register() {
                                         Course Name
                                     </td>
                                     <td className="px-4 py-2 text-gray-600">
-                                        IIT-MERN-2025
+                                        {course.course_name}
                                     </td>
                                 </tr>
                                 <tr>
@@ -40,7 +73,7 @@ export default function Register() {
                                         Fees (₹)
                                     </td>
                                     <td className="px-4 py-2 text-gray-600">
-                                        4000
+                                        {course.fees}
                                     </td>
                                 </tr>
                             </tbody>
@@ -64,7 +97,7 @@ export default function Register() {
                                 type="text"
                                 name="fullName"
                                 placeholder="Enter your name"
-                                onChange={handleChange}
+                                onChange={e => setName(e.target.value)}
                                 className="w-full px-4 py-2 rounded-lg border border-gray-300
                            focus:ring-2 focus:ring-emerald-400 outline-none"
                             />
@@ -79,7 +112,7 @@ export default function Register() {
                                 type="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                onChange={handleChange}
+                                onChange={e => setEmail(e.target.value)}
                                 className="w-full px-4 py-2 rounded-lg border border-gray-300
                            focus:ring-2 focus:ring-emerald-400 outline-none"
                             />
@@ -94,7 +127,7 @@ export default function Register() {
                                 type="text"
                                 name="mobile"
                                 placeholder="Enter your mobile number"
-                                onChange={handleChange}
+                                onChange={e => SetMobileNo(e.target.value)}
                                 className="w-full px-4 py-2 rounded-lg border border-gray-300
                            focus:ring-2 focus:ring-emerald-400 outline-none"
                             />

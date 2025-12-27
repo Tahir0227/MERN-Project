@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { getCourseInfo } from '../Services/studentServices'
 import { useParams } from 'react-router'
 
 function Courseinfo() {
 
+    const navigate = useNavigate()
     const { id } = useParams()
-
     const [course, setCourse] = useState([])
 
     useEffect(() => {
@@ -84,16 +84,17 @@ function Courseinfo() {
 
                             {/* Button */}
                             <div className="mt-8">
-                                <Link
-                                    to="/register"
-                                    className="inline-block px-6 py-3 rounded-lg
-                             bg-emerald-500 text-white
-                             font-semibold hover:bg-emerald-600
-                             transition shadow-md"
+                                <button
+                                    onClick={() => navigate(`/registerCourse/${course.Course_id}`)}
+                                    className="px-6 py-3 rounded-lg
+                                    bg-emerald-500 text-white
+                                    font-semibold hover:bg-emerald-600
+                                    transition shadow-md"
                                 >
                                     Register to Course
-                                </Link>
+                                </button>
                             </div>
+
                         </div>
 
                     </div>

@@ -4,7 +4,7 @@ const result = require('./result')
 
 function authUser(req, res, next) {
     const path = req.url
-    if (path == '/auth/login' || path == '/courses/all-active-courses' || path.startsWith('/courses/getInfo'))
+    if (path == '/auth/login' || path == '/courses/all-active-courses' || path.startsWith('/courses/getInfo') || path == '/student/register-to-course')
         next()
 
     else {
