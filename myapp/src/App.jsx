@@ -12,7 +12,7 @@ import MyCourses from "./Pages/MyCourses"
 export const LoginContext = createContext()
 
 function App() {
-
+ 
   const [loginStatus, setLoginStatus] = useState(false)
 
   return (
