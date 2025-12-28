@@ -13,6 +13,7 @@ import AdminHome from "./AdminPages/AdminHome"
 import AddNewCourse from "./AdminPages/AddNewCourse"
 import AllCourses from "./AdminPages/AllCourses"
 import UpdateCourse from "./AdminPages/UpdateCourse"
+import CourseVideos from "./Pages/CourseVideos"
 
 export const LoginContext = createContext()
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/add-new-course" element={<AddNewCourse />} />
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/update-course/:id" element={<UpdateCourse />} />
+          <Route path="/courses-videos" element={<CourseVideos />} />
 
 
 
