@@ -15,6 +15,7 @@ function authUser(req, res, next) {
         else {
             try {
                 const payload = jwt.verify(token, config.SECRET)
+                req.headers.email = payload.email
                 req.headers.role = payload.role
                 next()
             }

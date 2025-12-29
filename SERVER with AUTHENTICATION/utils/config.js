@@ -1,3 +1,3 @@
-const SECRET = 'aasdfghjklqwertyuiefjksnzcgd'
+const SECRET = 'aasdfghjklqwertyduiefjksnzcgd'
 
-module.exports = {SECRET}
+module.exports = { SECRET }

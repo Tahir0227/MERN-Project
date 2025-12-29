@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
 import { useNavigate } from 'react-router'
-// later you can replace this with getMyCourses()
-import { getAllActiveCourses } from '../Services/userServices'
+
+import { getMyCourses } from '../Services/studentServices'
 
 function MyCourses() {
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
+        console.log('my courses component loaded')
         loadCourses()
     }, [])
 
     const loadCourses = async () => {
-        const result = await getAllActiveCourses() // temporary
+        const token = localStorage.getItem('token')
+        const result = await getMyCourses(token)
+        console.log(result)
         if (result.status === 'success') {
             setCourses(result.data)
         }
@@ -57,16 +60,6 @@ function MyCourses() {
                                     {course.course_name}
                                 </h3>
 
-                                {/* Start Date */}
-                                <p className="text-sm text-gray-600 mt-2">
-                                    Start:{' '}
-                                    {new Date(course.start_date).toLocaleDateString('en-GB', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric',
-                                    })}
-                                </p>
-
                                 {/* Button */}
                                 <div className="mt-auto pt-6">
                                     <button
@@ -76,7 +69,7 @@ function MyCourses() {
                                             navigate(`/course-info/${course.Course_id}`)
                                         }
                                     >
-                                        View More →
+                                        Go to Course →
                                     </button>
                                 </div>
 
