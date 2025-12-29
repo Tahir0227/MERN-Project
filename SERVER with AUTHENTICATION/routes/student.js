@@ -58,20 +58,21 @@ router.put('/change-password', (req, res) => {
 
 router.get('/my-courses', (req, res) => {
     const email = req.headers.email
-    const sql = 'SELECT c.* FROM course c JOIN student s ON c.Course_id = s.course_id WHERE s.emial = ?'
+    const sql = 'SELECT c.* FROM course c JOIN student s ON c.Course_id = s.course_id WHERE s.emial = ? AND CURDATE()<=c.end_date'
     pool.query(sql, [email], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })
 
-router.get('/my-course-with-videos', (req, res) => {
+router.get('/my-course-with-videos/:Course_id', (req, res) => {
     const email = req.headers.email
-    const sql = `SELECT c.course_id, c.course_name, v.video_id, v.title, v.youtube_url, v.added_at,c.video_expire_days 
+    const Course_id = req.params.Course_id
+    const sql = `SELECT c.*, v.video_id, v.title, v.youtube_url, v.added_at,c.video_expire_days 
                  FROM student s 
                  INNER JOIN course c ON s.course_id = c.course_id 
                  INNER JOIN videos v ON v.course_id = c.course_id 
-                 WHERE s.emial = ? AND DATEDIFF(CURDATE(), v.added_at) <= c.video_expire_days`
-    pool.query(sql, [email], (error, data) => {
+                 WHERE s.emial = ? AND DATEDIFF(CURDATE(), v.added_at) <= c.video_expire_days AND c.course_id = ?;`
+    pool.query(sql, [email, Course_id], (error, data) => {
         res.send(result.createResult(error, data))
     })
 })

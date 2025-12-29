@@ -8,6 +8,7 @@ import Profile from "./Pages/Profile"
 import { createContext, useState } from "react"
 import Courseinfo from "./Pages/Courseinfo"
 import MyCourses from "./Pages/MyCourses"
+import MySelectedCourse from "./Pages/MySelectedCourse"
 
 export const LoginContext = createContext()
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/registerCourse/:id" element={<Register />} />
           <Route path="/course-info/:id" element={<Courseinfo />} />
           <Route path="/my-course" element={<MyCourses />} />
+          <Route path="/my-course-info/:id" element={<MySelectedCourse />} />
 
 
         </Routes>
