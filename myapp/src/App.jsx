@@ -8,6 +8,11 @@ import Profile from "./Pages/Profile"
 import { createContext, useState } from "react"
 import Courseinfo from "./Pages/Courseinfo"
 import MyCourses from "./Pages/MyCourses"
+import MyProfile from "./Pages/MyProfile"
+import AdminHome from "./AdminPages/AdminHome"
+import AddNewCourse from "./AdminPages/AddNewCourse"
+import AllCourses from "./AdminPages/AllCourses"
+import UpdateCourse from "./AdminPages/UpdateCourse"
 
 export const LoginContext = createContext()
 
@@ -25,6 +30,12 @@ function App() {
           <Route path="/registerCourse/:id" element={<Register />} />
           <Route path="/course-info/:id" element={<Courseinfo />} />
           <Route path="/my-course" element={<MyCourses />} />
+          <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/add-new-course" element={<AddNewCourse />} />
+          <Route path="/all-courses" element={<AllCourses />} />
+          <Route path="/update-course/:id" element={<UpdateCourse />} />
+
 
 
         </Routes>
