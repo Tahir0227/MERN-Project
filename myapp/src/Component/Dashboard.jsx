@@ -9,88 +9,105 @@ function Dashboard() {
     }
 
     return (
-        <nav className="bg-emerald-500 shadow-sm relative z-50">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="flex justify-center items-center h-12 gap-10">
+        <aside className="fixed top-16 left-0 w-64 h-[calc(100vh-4rem)]
+                      bg-emerald-600 text-white shadow-lg z-40">
 
-                    {/* Students */}
-                    <div className="relative">
-                        <button
-                            onClick={() => toggleMenu('students')}
-                            className="text-white font-medium hover:text-emerald-100 transition"
-                        >
-                            Students ▾
-                        </button>
+            <div className="p-4 space-y-4">
 
-                        {openMenu === 'students' && (
-                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
-                                <Link
-                                    to="/students"
-                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                >
-                                    Get All Students
-                                </Link>
-                            </div>
-                        )}
-                    </div>
+                {/* Title */}
+                <h2 className="text-lg font-bold tracking-wide">
+                    Dashboard
+                </h2>
 
-                    {/* Courses */}
-                    <div className="relative">
-                        <button
-                            onClick={() => toggleMenu('courses')}
-                            className="text-white font-medium hover:text-emerald-100 transition"
-                        >
-                            Courses ▾
-                        </button>
+                {/* Divider */}
+                <hr className="border-emerald-400" />
 
-                        {openMenu === 'courses' && (
-                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
-                                <Link
-                                    to="/courses"
-                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                >
-                                    Get All Courses
-                                </Link>
-                                <Link
-                                    to="/courses/add"
-                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                >
-                                    Add New Course
-                                </Link>
-                            </div>
-                        )}
-                    </div>
+                {/* Students */}
+                <div>
+                    <button
+                        onClick={() => toggleMenu('students')}
+                        className="w-full flex justify-between items-center
+                       px-3 py-2 rounded-lg
+                       hover:bg-emerald-500 transition"
+                    >
+                        <span> Students</span>
+                        <span>{openMenu === 'students' ? '▴' : '▾'}</span>
+                    </button>
 
-                    {/* Videos */}
-                    <div className="relative">
-                        <button
-                            onClick={() => toggleMenu('videos')}
-                            className="text-white font-medium hover:text-emerald-100 transition"
-                        >
-                            Videos ▾
-                        </button>
-
-                        {openMenu === 'videos' && (
-                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
-                                <Link
-                                    to="/videos"
-                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                >
-                                    Get All Videos
-                                </Link>
-                                <Link
-                                    to="/videos/add"
-                                    className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                >
-                                    Add New Video
-                                </Link>
-                            </div>
-                        )}
-                    </div>
-
+                    {openMenu === 'students' && (
+                        <div className="ml-6 mt-1 space-y-1 text-sm">
+                            <Link
+                                to="/students"
+                                className="block px-2 py-1 rounded hover:bg-emerald-500"
+                            >
+                                Get All Students
+                            </Link>
+                        </div>
+                    )}
                 </div>
+
+                {/* Courses */}
+                <div>
+                    <button
+                        onClick={() => toggleMenu('courses')}
+                        className="w-full flex justify-between items-center
+                       px-3 py-2 rounded-lg
+                       hover:bg-emerald-500 transition"
+                    >
+                        <span> Courses</span>
+                        <span>{openMenu === 'courses' ? '▴' : '▾'}</span>
+                    </button>
+
+                    {openMenu === 'courses' && (
+                        <div className="ml-6 mt-1 space-y-1 text-sm">
+                            <Link
+                                to="/courses"
+                                className="block px-2 py-1 rounded hover:bg-emerald-500"
+                            >
+                                Get All Courses
+                            </Link>
+                            <Link
+                                to="/courses/add"
+                                className="block px-2 py-1 rounded hover:bg-emerald-500"
+                            >
+                                Add New Course
+                            </Link>
+                        </div>
+                    )}
+                </div>
+
+                {/* Videos */}
+                <div>
+                    <button
+                        onClick={() => toggleMenu('videos')}
+                        className="w-full flex justify-between items-center
+                       px-3 py-2 rounded-lg
+                       hover:bg-emerald-500 transition"
+                    >
+                        <span> Videos</span>
+                        <span>{openMenu === 'videos' ? '▴' : '▾'}</span>
+                    </button>
+
+                    {openMenu === 'videos' && (
+                        <div className="ml-6 mt-1 space-y-1 text-sm">
+                            <Link
+                                to="/videos"
+                                className="block px-2 py-1 rounded hover:bg-emerald-500"
+                            >
+                                Get All Videos
+                            </Link>
+                            <Link
+                                to="/videos/add"
+                                className="block px-2 py-1 rounded hover:bg-emerald-500"
+                            >
+                                Add New Video
+                            </Link>
+                        </div>
+                    )}
+                </div>
+
             </div>
-        </nav>
+        </aside>
     )
 }
 
