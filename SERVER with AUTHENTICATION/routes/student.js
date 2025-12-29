@@ -78,5 +78,15 @@ router.get('/my-course-with-videos/:Course_id', (req, res) => {
 })
 
 
+router.get('/my-course/video/:video_id', (req, res) => {
+    const video_id = req.params.video_id
+    const sql = `SELECT c.*, v.* 
+                 FROM course c 
+                 INNER JOIN videos v ON v.course_id = c.course_id 
+                 WHERE v.video_id = ?;`
+    pool.query(sql, [video_id], (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
 
 module.exports = router

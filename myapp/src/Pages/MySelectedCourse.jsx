@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { getCourseWithVideos } from '../Services/studentServices'
 
 function MySelectedCourse() {
 
+    const navigate = useNavigate()
     const { id } = useParams()
     const [course, setCourse] = useState([])
     const [courseInfo, setCourseInfo] = useState([])
@@ -86,14 +87,13 @@ function MySelectedCourse() {
                                 <div className="border rounded-lg divide-y">
                                     {course.map((video) => (
                                         <div key={video.video_id} className="px-4 py-3">
-                                            <a
-                                                href={video.youtube_url}
-                                                target="_blank"
-                                                rel="noreferrer"
+                                            <button
+                                                onClick={() => navigate(`/my-course/videos/${video.video_id}`)}
                                                 className="text-emerald-600 font-semibold hover:underline"
                                             >
                                                 {video.title}
-                                            </a>
+                                            </button>
+
 
                                             <p className="text-xs text-gray-500 mt-1">
                                                 Added:{" "}
