@@ -14,3 +14,11 @@ export async function registerToCourse(name, email, course_id, mobile_no) {
     const response = await axios.post(url, body)
     return response.data
 }
+
+export async function getMyCourses(token) {
+    const url = config.BASE_URL + '/student/my-courses'
+    const headers = { token }
+
+    const response = await axios.get(url, { headers })
+    return response.data
+}

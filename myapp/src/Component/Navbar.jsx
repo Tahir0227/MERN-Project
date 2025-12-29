@@ -31,7 +31,7 @@ function Navbar() {
                             Home
                         </Link>
                         <Link
-                            to="/courses"
+                            to="/my-course"
                             className="font-medium text-white hover:text-emerald-100 transition"
                         >
                             My Courses
