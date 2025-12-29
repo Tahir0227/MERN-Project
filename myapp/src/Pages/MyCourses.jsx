@@ -66,7 +66,7 @@ function MyCourses() {
                                         className="px-4 py-2 rounded-lg bg-emerald-500 text-white
                                font-semibold text-sm hover:bg-emerald-600 transition"
                                         onClick={() =>
-                                            navigate(`/course-info/${course.Course_id}`)
+                                            navigate(`/my-course-info/${course.Course_id}`)
                                         }
                                     >
                                         Go to Course →

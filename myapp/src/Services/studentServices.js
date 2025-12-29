@@ -22,3 +22,11 @@ export async function getMyCourses(token) {
     const response = await axios.get(url, { headers })
     return response.data
 }
+
+export async function getCourseWithVideos(Course_id, token) {
+    const url = `${config.BASE_URL}/student/my-course-with-videos/${Course_id}`
+    const headers = { token }
+
+    const response = await axios.get(url, { headers })
+    return response.data
+}

@@ -9,7 +9,7 @@ function Navbar() {
 
                     {/* LEFT: Profile */}
                     <Link
-                        to="/my-profile"
+                        to="/profile"
                         className="flex items-center gap-2 text-white hover:opacity-90 transition"
                     >
                         <img
@@ -75,6 +75,7 @@ function Navbar() {
                                 </li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
