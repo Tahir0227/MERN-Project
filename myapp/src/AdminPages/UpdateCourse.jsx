@@ -1,58 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../Component/Dashboard";
-import AdminNavbar from './../Component/AdminNavbar';
-
+import AdminNavbar from "../Component/AdminNavbar";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import { getCourseInfo2, UpdateCourseById } from "../Services/adminServices";
 
 function UpdateCourse() {
+
+    const navigate = useNavigate();
+    const { id } = useParams();
+
     const [course, setCourse] = useState({
-        name: "",
+        course_name: "",
         description: "",
-        startDate: "",
-        endDate: "",
+        start_date: "",
+        end_date: "",
         fees: "",
-        expiryDays: ""
+        video_expire_days: ""
     });
 
-    const handleChange = (e) => {
-        setCourse({ ...course, [e.target.name]: e.target.value });
+    useEffect(() => {
+        console.log("Update course component loaded");
+        loadCourse();
+    }, []);
+
+    const loadCourse = async () => {
+        const result = await getCourseInfo2(id);
+        if (result.status === "success") {
+            setCourse(result.data[0]);
+        }
     };
 
-    const handleSubmit = (e) => {
+    const courseUpdated = async (e) => {
         e.preventDefault();
-        console.log(course);
+
+        const token = localStorage.getItem("token");
+        const result = await UpdateCourseById(token, id, course.course_name, course.description, course.start_date?.slice(0, 10), course.end_date?.slice(0, 10), course.fees, course.video_expire_days);
+        console.log(result);
+        if (result.status === "success") {
+            toast.success("Course updated successfully!");
+            navigate(-1);
+        }
     };
 
     return (
         <>
             <AdminNavbar />
             <Dashboard />
-            <div
-                className="min-h-screen w-full
-      bg-gradient-to-br from-emerald-100 via-white to-blue-100
-      flex items-center justify-center px-4"
-            >
+
+            <div className="min-h-screen w-full bg-gradient-to-br from-emerald-100 via-white to-blue-100 flex items-center justify-center px-4">
                 <div className="w-full max-w-2xl">
                     <div className="bg-white rounded-3xl shadow-2xl p-8">
 
-                        {/* Header */}
                         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
                             Update Course
                         </h2>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={courseUpdated} className="space-y-6">
 
                             {/* Course Name */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">
-                                    Course Details
+                                    Course Name
                                 </label>
                                 <input
                                     type="text"
-                                    name="name"
-                                    placeholder="Example: MERN Full Stack Development"
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                focus:ring-2 focus:ring-emerald-400 outline-none"
+                                    value={course.course_name}
+                                    onChange={(e) =>
+                                        setCourse({ ...course, course_name: e.target.value })
+                                    }
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                 />
                             </div>
 
@@ -63,11 +80,11 @@ function UpdateCourse() {
                                 </label>
                                 <input
                                     type="text"
-                                    name="description"
-                                    placeholder="Example: Learn MERN from basics to advanced"
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                focus:ring-2 focus:ring-emerald-400 outline-none"
+                                    value={course.description}
+                                    onChange={(e) =>
+                                        setCourse({ ...course, description: e.target.value })
+                                    }
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                 />
                             </div>
 
@@ -79,10 +96,15 @@ function UpdateCourse() {
                                     </label>
                                     <input
                                         type="date"
-                                        name="startDate"
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                  focus:ring-2 focus:ring-emerald-400 outline-none"
+                                        value={
+                                            course.start_date
+                                                ? new Date(course.start_date).toISOString().slice(0, 10)
+                                                : ""
+                                        }
+                                        onChange={(e) =>
+                                            setCourse({ ...course, start_date: e.target.value })
+                                        }
+                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                     />
                                 </div>
 
@@ -92,10 +114,15 @@ function UpdateCourse() {
                                     </label>
                                     <input
                                         type="date"
-                                        name="endDate"
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                  focus:ring-2 focus:ring-emerald-400 outline-none"
+                                        value={
+                                            course.end_date
+                                                ? new Date(course.end_date).toISOString().slice(0, 10)
+                                                : ""
+                                        }
+                                        onChange={(e) =>
+                                            setCourse({ ...course, end_date: e.target.value })
+                                        }
+                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                     />
                                 </div>
                             </div>
@@ -107,11 +134,11 @@ function UpdateCourse() {
                                 </label>
                                 <input
                                     type="number"
-                                    name="fees"
-                                    placeholder="Example: 4999"
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                focus:ring-2 focus:ring-emerald-400 outline-none"
+                                    value={course.fees}
+                                    onChange={(e) =>
+                                        setCourse({ ...course, fees: e.target.value })
+                                    }
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                 />
                             </div>
 
@@ -122,20 +149,20 @@ function UpdateCourse() {
                                 </label>
                                 <input
                                     type="number"
-                                    name="expiryDays"
-                                    placeholder="Example: 180"
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300
-                focus:ring-2 focus:ring-emerald-400 outline-none"
+                                    value={course.video_expire_days}
+                                    onChange={(e) =>
+                                        setCourse({
+                                            ...course,
+                                            video_expire_days: e.target.value
+                                        })
+                                    }
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-400 outline-none"
                                 />
                             </div>
 
-                            {/* Submit */}
                             <button
                                 type="submit"
-                                className="w-full bg-emerald-500 hover:bg-emerald-600
-              text-white font-bold py-3 rounded-xl
-              shadow-md hover:shadow-lg transition"
+                                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-md hover:shadow-lg transition"
                             >
                                 Update Course
                             </button>

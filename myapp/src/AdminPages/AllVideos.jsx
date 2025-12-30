@@ -1,48 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavbar from './../Component/AdminNavbar'
 import Dashboard from '../Component/Dashboard'
+import { useNavigate } from 'react-router'
+import { getAllCourses, getAllVideos, deleteVideoById } from '../Services/adminServices'
+import { toast } from 'react-toastify'
 
 function AllVideos() {
 
+    const navigate = useNavigate()
     const [selectedCourse, setSelectedCourse] = useState('All')
     const [videos, setVideos] = useState([])
-
-    useEffect(() => {
-        // Static data (replace with API later)
-        setVideos([
-            {
-                id: 1,
-                title: 'Intro to MERN',
-                course: 'IIT-MERN-2025',
-                added: '10 Dec 2025'
-            },
-            {
-                id: 2,
-                title: 'React Basics',
-                course: 'IIT-MERN-2025',
-                added: '12 Dec 2025'
-            },
-            {
-                id: 3,
-                title: 'AI Overview',
-                course: 'AI Fundamentals',
-                added: '25 Nov 2025'
-            },
-            {
-                id: 4,
-                title: 'Android Setup',
-                course: 'Android',
-                added: '26 Nov 2025'
-            }
-        ])
-    }, [])
-
-    const courses = ['All', 'IIT-MERN-2025', 'AI Fundamentals', 'Android']
+    const [courses, setCourses] = useState([])
 
     const filteredVideos =
         selectedCourse === 'All'
             ? videos
-            : videos.filter(v => v.course === selectedCourse)
+            : videos.filter(v => v.course_id === Number(selectedCourse))
+
+    useEffect(() => {
+        loadVideos()
+        loadCourses()
+    }, [])
+
+    const loadVideos = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getAllVideos(token)
+        if (result.status == 'success') {
+            setVideos(result.data)
+        }
+    }
+
+    const loadCourses = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getAllCourses(token)
+        if (result.status == 'success') {
+            setCourses(result.data)
+        }
+    }
+
+    const deleteVideo = async (video_id) => {
+        const token = localStorage.getItem('token')
+        const result = await deleteVideoById(token, video_id)
+        if (result.status == 'success') {
+            toast.success("video Deleted Successfully !")
+            loadVideos()
+        }
+        else {
+            toast.error("Can not delete this video Now")
+        }
+    }
 
     return (
         <>
@@ -61,14 +67,17 @@ function AllVideos() {
                             value={selectedCourse}
                             onChange={(e) => setSelectedCourse(e.target.value)}
                             className="px-4 py-2 rounded-lg border
-                         focus:ring-2 focus:ring-emerald-400 outline-none"
+                                    focus:ring-2 focus:ring-emerald-400 outline-none"
                         >
+                            <option value="All">All Courses</option>
+
                             {courses.map(course => (
-                                <option key={course} value={course}>
-                                    {course === 'All' ? 'All Courses' : course}
+                                <option key={course.Course_id} value={course.Course_id}>
+                                    {course.course_name}
                                 </option>
                             ))}
                         </select>
+
                     </div>
 
                     {/* Title (Centered) */}
@@ -83,44 +92,50 @@ function AllVideos() {
                 {/* Video List */}
                 <div className="max-w-7xl mx-auto space-y-4">
 
-                    {filteredVideos.length === 0 && (
-                        <div className="bg-white rounded-xl shadow-md p-6 text-center text-gray-500">
-                            No videos found for selected course.
-                        </div>
-                    )}
-
                     {filteredVideos.map(video => (
                         <div
-                            key={video.id}
+                            key={video.video_id}
                             className="bg-white rounded-xl shadow-md
-                         hover:shadow-lg transition
-                         flex justify-between items-center p-6"
+               hover:shadow-lg transition
+               flex justify-between items-center p-6"
                         >
-                            {/* Info */}
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-800">
                                     {video.title}
                                 </h3>
                                 <p className="text-sm text-gray-500">
-                                    Course: {video.course}
+                                    Course: {video.course_name}
                                 </p>
                             </div>
 
-                            {/* Meta */}
                             <div className="text-right">
                                 <p className="text-sm text-gray-500">
-                                    Added: {video.added}
+                                    Added: {new Date(video.added_at).toLocaleDateString("en-GB")}
+
                                 </p>
-                                <button
-                                    className="mt-2 px-4 py-1.5 text-sm rounded-md
-                             bg-emerald-500 text-white
-                             hover:bg-emerald-600 transition"
-                                >
-                                    View
-                                </button>
+
+                                <div className="flex gap-2 mt-2">
+                                    <button
+                                        onClick={() => navigate(`/update-video/${video.video_id}`)}
+                                        className="px-3 py-1.5 text-sm rounded-md
+                                                   bg-yellow-400 hover:bg-yellow-500 text-white"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        onClick={() => deleteVideo(video.video_id)}
+                                        className="px-4 py-1.5 text-sm rounded-md
+                     bg-red-500 text-white
+                     hover:bg-red-600 transition"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
+
 
                 </div>
             </div>

@@ -43,7 +43,7 @@ router.get('/courses/all-active-courses', (req, res) => {
     pool.query(sql, (error, data) => {
         res.send(result.createResult(error, data))
     })
-    
+
 })
 
 router.get('/courses/getInfo/:Course_id', (req, res) => {

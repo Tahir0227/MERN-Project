@@ -1,41 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavbar from './../Component/AdminNavbar';
 import Dashboard from '../Component/Dashboard'
+import { getAllCourses, deleteCourseById } from '../Services/adminServices';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 function AllCourses() {
+    const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
-        setCourses([
-            {
-                id: 1,
-                name: 'IIT-MERN-2025',
-                description: 'MERN Stack Development',
-                fees: 4000,
-                start: '10 Dec 2025',
-                end: '5 Jan 2026',
-                expire: 7
-            },
-            {
-                id: 3,
-                name: 'AI Fundamentals',
-                description: 'AI & ML Basics',
-                fees: 10000,
-                start: '24 Nov 2025',
-                end: '24 Dec 2025',
-                expire: 5
-            },
-            {
-                id: 6,
-                name: 'Android',
-                description: 'Android App Development',
-                fees: 9999,
-                start: '24 Nov 2025',
-                end: '24 Dec 2025',
-                expire: 7
-            }
-        ])
+        loadCourses()
     }, [])
+
+    const loadCourses = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getAllCourses(token)
+        if (result.status == 'success') {
+            setCourses(result.data)
+        }
+    }
+
+    const deleteCourse = async (Course_id) => {
+        const token = localStorage.getItem('token')
+        const result = await deleteCourseById(token, Course_id)
+        if (result.status == 'success') {
+            toast.success("Course Deleted Successfully !")
+            loadCourses()
+        }
+        else {
+            toast.error("Can not delete this course Now")
+        }
+    }
 
     return (
         <>
@@ -52,6 +48,7 @@ function AllCourses() {
                     </h2>
 
                     <button
+                        onClick={() => navigate(`/add-course`)}
                         className="bg-emerald-500 text-white px-5 py-2
                                    rounded-lg font-semibold hover:bg-emerald-600 transition"
                     >
@@ -64,7 +61,7 @@ function AllCourses() {
 
                     {courses.map(course => (
                         <div
-                            key={course.id}
+                            key={course.Course_id}
                             className="bg-white rounded-xl shadow-md hover:shadow-lg
                                        transition flex overflow-hidden"
                         >
@@ -77,7 +74,7 @@ function AllCourses() {
                                 {/* Name */}
                                 <div className="md:col-span-2">
                                     <h3 className="text-lg font-semibold text-gray-800">
-                                        {course.name}
+                                        {course.course_name}
                                     </h3>
                                     <p className="text-sm text-gray-500">
                                         {course.description}
@@ -93,24 +90,32 @@ function AllCourses() {
                                 {/* Start */}
                                 <div>
                                     <p className="text-xs text-gray-500">Start</p>
-                                    <p>{course.start}</p>
+                                    <p>
+                                        {new Date(course.start_date).toLocaleDateString("en-GB")}
+                                    </p>
+
                                 </div>
 
                                 {/* End */}
                                 <div>
                                     <p className="text-xs text-gray-500">End</p>
-                                    <p>{course.end}</p>
+                                    <p>
+                                        {new Date(course.end_date).toLocaleDateString("en-GB")}
+                                    </p>
+
                                 </div>
 
                                 {/* Actions */}
                                 <div className="flex gap-2 justify-end">
                                     <button
+                                        onClick={() => navigate(`/update-course/${course.Course_id}`)}
                                         className="px-3 py-1.5 text-sm rounded-md
                                                    bg-yellow-400 hover:bg-yellow-500 text-white"
                                     >
                                         Edit
                                     </button>
                                     <button
+                                        onClick={() => deleteCourse(course.Course_id)}
                                         className="px-3 py-1.5 text-sm rounded-md
                                                    bg-red-500 hover:bg-red-600 text-white"
                                     >

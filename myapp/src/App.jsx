@@ -9,7 +9,6 @@ import Courseinfo from "./Pages/Courseinfo"
 import MyCourses from "./Pages/MyCourses"
 import MySelectedCourse from "./Pages/MySelectedCourse"
 
-import AddCourse from "./AdminPages/AddNewCourse"
 import AdminHome from "./AdminPages/AdminHome"
 import AllCourses from "./AdminPages/AllCourses"
 import UpdateCourse from "./AdminPages/UpdateCourse"
@@ -41,20 +40,17 @@ function App() {
           <Route path="/my-course-info/:id" element={<MySelectedCourse />} />
           <Route path="/my-course/videos/:id" element={<CourseVideos />} />
 
-          <Route path="/add-course" element={<AddCourse />} />
           <Route path="/admin-home" element={<AdminHome />} />
           <Route path="/all-courses" element={<AllCourses />} />
-          <Route path="/update-course" element={<UpdateCourse />} />
+          <Route path="/update-course/:id" element={<UpdateCourse />} />
           <Route path="/profile" element={<MyProfile />} />
-
-
 
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/add-new-course" element={<AddNewCourse />} />
           <Route path="/all-videos" element={<AllVideos />} />
-          <Route path="/all-student" element={<AllStudent />} />
+          <Route path="/all-students" element={<AllStudent />} />
           <Route path="/add-new-video" element={<AddNewVideo />} />
-          <Route path="/update-video" element={<UpdateVideo />} />
+          <Route path="/update-video/:id" element={<UpdateVideo />} />
 
 
 

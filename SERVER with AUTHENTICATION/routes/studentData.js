@@ -6,9 +6,8 @@ const { checkAuthorization } = require('../utils/auth')
 const router = express.Router()
 
 router.get('/enrolled-students', checkAuthorization, (req, res) => {
-    const { course_id } = req.query
-    const sql = 'SELECT * FROM Student WHERE course_id = ?'
-    pool.query(sql, [course_id], (error, data) => {
+    const sql = 'SELECT * FROM Student '
+    pool.query(sql, (error, data) => {
         res.send(result.createResult(error, data))
     })
 })

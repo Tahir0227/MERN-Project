@@ -1,45 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavbar from '../Component/AdminNavbar'
 import Dashboard from '../Component/Dashboard'
+import { getAllCourses, getAllStudent } from '../Services/adminServices'
 
 function AllStudent() {
 
-    const [selectedCourse, setSelectedCourse] = useState('All')
+    const [selectedCourse, setSelectedCourse] = useState('')
     const [students, setStudents] = useState([])
+    const [courses, setCourses] = useState([])
 
     useEffect(() => {
-        // Temporary static data (API ready)
-        setStudents([
-            {
-                regNo: 1,
-                name: 'Student Two',
-                email: 's2@email.com',
-                course: 'IIT-MERN-2025',
-                mobile: '1234567890'
-            },
-            {
-                regNo: 3,
-                name: 'Student Three',
-                email: 's3@email.com',
-                course: 'IIT-MERN-2025',
-                mobile: '1234567890'
-            },
-            {
-                regNo: 6,
-                name: 'Student Six',
-                email: 's6@email.com',
-                course: 'N/A',
-                mobile: '1234567890'
-            }
-        ])
+        loadStudents()
+        loadCourses()
     }, [])
 
-    const courses = ['All', 'IIT-MERN-2025', 'AI Fundamentals', 'Android']
+    const loadStudents = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getAllStudent(token)
+        if (result.status == 'success') {
+            setStudents(result.data)
+        }
+    }
+
+    const loadCourses = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getAllCourses(token)
+        if (result.status == 'success') {
+            setCourses(result.data)
+        }
+    }
 
     const filteredStudents =
-        selectedCourse === 'All'
+        selectedCourse === ''
             ? students
-            : students.filter(s => s.course === selectedCourse)
+            : students.filter(s => String(s.course_id) === String(selectedCourse))
+
 
     return (
         <>
@@ -60,12 +55,14 @@ function AllStudent() {
                         <select
                             value={selectedCourse}
                             onChange={(e) => setSelectedCourse(e.target.value)}
-                            className="w-full md:w-64 px-4 py-2 rounded-lg border
-                         focus:ring-2 focus:ring-emerald-400 outline-none"
+                            className="px-4 py-2 rounded-lg border
+                                    focus:ring-2 focus:ring-emerald-400 outline-none"
                         >
+                            <option value="All">All Courses</option>
+
                             {courses.map(course => (
-                                <option key={course} value={course}>
-                                    {course === 'All' ? 'All Courses' : course}
+                                <option key={course.Course_id} value={course.Course_id}>
+                                    {course.course_name}
                                 </option>
                             ))}
                         </select>
@@ -106,28 +103,28 @@ function AllStudent() {
                             <tbody className="divide-y">
                                 {filteredStudents.map((student, index) => (
                                     <tr
-                                        key={student.regNo}
+                                        key={student.reg_no}
                                         className={`hover:bg-emerald-50 transition
                       ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
                                     >
-                                        <td className="px-6 py-3">{student.regNo}</td>
+                                        <td className="px-6 py-3">{student.reg_no}</td>
                                         <td className="px-6 py-3 font-medium text-gray-800">
                                             {student.name}
                                         </td>
                                         <td className="px-6 py-3 text-gray-600">
-                                            {student.email}
+                                            {student.emial}
                                         </td>
                                         <td className="px-6 py-3">
                                             <span
                                                 className={`px-3 py-1 rounded-full text-xs font-semibold
-                          ${student.course === 'N/A'
+                          ${student.course_id === 'N/A'
                                                         ? 'bg-gray-200 text-gray-600'
                                                         : 'bg-emerald-100 text-emerald-700'}`}
                                             >
-                                                {student.course}
+                                                {student.course_id}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-3">{student.mobile}</td>
+                                        <td className="px-6 py-3">{student.mobile_no}</td>
                                     </tr>
                                 ))}
 

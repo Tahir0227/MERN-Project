@@ -37,7 +37,7 @@ function Dashboard() {
                     {openMenu === 'students' && (
                         <div className="ml-6 mt-1 space-y-1 text-sm">
                             <Link
-                                to="/students"
+                                to="/all-students"
                                 className="block px-2 py-1 rounded hover:bg-emerald-500"
                             >
                                 Get All Students
@@ -61,13 +61,13 @@ function Dashboard() {
                     {openMenu === 'courses' && (
                         <div className="ml-6 mt-1 space-y-1 text-sm">
                             <Link
-                                to="/courses"
+                                to="/all-courses"
                                 className="block px-2 py-1 rounded hover:bg-emerald-500"
                             >
                                 Get All Courses
                             </Link>
                             <Link
-                                to="/courses/add"
+                                to="/add-new-course"
                                 className="block px-2 py-1 rounded hover:bg-emerald-500"
                             >
                                 Add New Course
@@ -91,13 +91,13 @@ function Dashboard() {
                     {openMenu === 'videos' && (
                         <div className="ml-6 mt-1 space-y-1 text-sm">
                             <Link
-                                to="/videos"
+                                to="/all-videos"
                                 className="block px-2 py-1 rounded hover:bg-emerald-500"
                             >
                                 Get All Videos
                             </Link>
                             <Link
-                                to="/videos/add"
+                                to="/add-new-video"
                                 className="block px-2 py-1 rounded hover:bg-emerald-500"
                             >
                                 Add New Video
