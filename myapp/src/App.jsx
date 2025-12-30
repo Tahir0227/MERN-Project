@@ -22,8 +22,7 @@ export const LoginContext = createContext()
 
 function App() {
 
-  const [loginStatus, setLoginStatus] = useState(false)
-      //means loginstaus variable is global anyone can change this value 
+  const [loginStatus, setLoginStatus] = useState(false) 
   return (
     <>
       <LoginContext.Provider value={{ loginStatus, setLoginStatus }}>
