@@ -30,6 +30,15 @@ function Navbar() {
                         >
                             Home
                         </Link>
+
+                        <Link
+                            to="/home#aCourse"
+                            className="font-medium text-white hover:text-emerald-100 transition"
+                        >
+                            Available Courses
+                        </Link>
+
+
                         <Link
                             to="/my-course"
                             className="font-medium text-white hover:text-emerald-100 transition"

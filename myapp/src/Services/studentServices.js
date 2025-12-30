@@ -46,3 +46,12 @@ export async function getProfile(token) {
     const response = await axios.get(url, { headers })
     return response.data
 }
+
+export async function updateProfile(token, name, mobileNo, password) {
+    const url = config.BASE_URL + '/student/updateProfile'
+    const body = { name, mobileNo, password }
+    const headers = { token }
+
+    const response = await axios.put(url, body, { headers })
+    return response.data
+}

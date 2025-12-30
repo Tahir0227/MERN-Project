@@ -42,7 +42,8 @@ function AllCourses() {
             <Navbar />
             <Dashboard />
 
-            <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-blue-100 px-6 py-10">
+            {/* MAIN CONTENT (shifted right to avoid dashboard overlap) */}
+            <div className="ml-64 min-h-screen bg-gradient-to-br from-emerald-100 via-white to-blue-100 px-6 py-10">
 
                 {/* Page Header */}
                 <div className="max-w-7xl mx-auto mb-10 flex justify-between items-center">
@@ -52,7 +53,7 @@ function AllCourses() {
 
                     <button
                         className="bg-emerald-500 text-white px-5 py-2
-                       rounded-lg font-semibold hover:bg-emerald-600 transition"
+                                   rounded-lg font-semibold hover:bg-emerald-600 transition"
                     >
                         + Add New Course
                     </button>
@@ -65,9 +66,9 @@ function AllCourses() {
                         <div
                             key={course.id}
                             className="bg-white rounded-xl shadow-md hover:shadow-lg
-                         transition flex overflow-hidden"
+                                       transition flex overflow-hidden"
                         >
-                            {/* Left Color Strip */}
+                            {/* Left Accent Strip */}
                             <div className="w-2 bg-emerald-500"></div>
 
                             {/* Content */}
@@ -105,13 +106,13 @@ function AllCourses() {
                                 <div className="flex gap-2 justify-end">
                                     <button
                                         className="px-3 py-1.5 text-sm rounded-md
-                               bg-yellow-400 hover:bg-yellow-500 text-white"
+                                                   bg-yellow-400 hover:bg-yellow-500 text-white"
                                     >
                                         Edit
                                     </button>
                                     <button
                                         className="px-3 py-1.5 text-sm rounded-md
-                               bg-red-500 hover:bg-red-600 text-white"
+                                                   bg-red-500 hover:bg-red-600 text-white"
                                     >
                                         Delete
                                     </button>
