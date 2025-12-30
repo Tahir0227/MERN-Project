@@ -4,11 +4,19 @@ import { ToastContainer } from 'react-toastify'
 import Login from "./Pages/Login"
 import Home from "./Pages/Home"
 import Register from "./Pages/Register"
-import Profile from "./Pages/Profile"
 import { createContext, useState } from "react"
 import Courseinfo from "./Pages/Courseinfo"
 import MyCourses from "./Pages/MyCourses"
 import MySelectedCourse from "./Pages/MySelectedCourse"
+
+import AddCourse from "./AdminPages/AddNewCourse"
+import AdminHome from "./AdminPages/AdminHome"
+import AllCourses from "./AdminPages/AllCourses"
+import UpdateCourse from "./AdminPages/UpdateCourse"
+import MyProfile from "./Pages/MyProfile"
+import CourseVideos from "./Pages/CourseVideos"
+
+import EditProfile from "./Pages/EditProfile"
 
 export const LoginContext = createContext()
 
@@ -22,12 +30,21 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/registerCourse/:id" element={<Register />} />
           <Route path="/course-info/:id" element={<Courseinfo />} />
           <Route path="/my-course" element={<MyCourses />} />
           <Route path="/my-course-info/:id" element={<MySelectedCourse />} />
+          <Route path="/my-course/videos/:id" element={<CourseVideos />} />
 
+          <Route path="/add-course" element={<AddCourse />} />
+          <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/all-courses" element={<AllCourses />} />
+          <Route path="/update-course" element={<UpdateCourse />} />
+          <Route path="/profile" element={<MyProfile />} />
+
+
+
+          <Route path="/edit-profile" element={<EditProfile />} />
 
         </Routes>
       </LoginContext.Provider>

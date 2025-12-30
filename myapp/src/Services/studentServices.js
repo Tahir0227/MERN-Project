@@ -30,3 +30,11 @@ export async function getCourseWithVideos(Course_id, token) {
     const response = await axios.get(url, { headers })
     return response.data
 }
+
+export async function getVideo(video_id, token) {
+    const url = `${config.BASE_URL}/student/my-course/video/${video_id}`
+    const headers = { token }
+
+    const response = await axios.get(url, { headers })
+    return response.data
+}
