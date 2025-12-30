@@ -17,12 +17,22 @@ import MyProfile from "./Pages/MyProfile"
 import CourseVideos from "./Pages/CourseVideos"
 
 import EditProfile from "./Pages/EditProfile"
+import AddNewCourse from "./AdminPages/AddNewCourse"
+import AllVideos from "./AdminPages/AllVideos"
+import AllStudent from "./AdminPages/AllStudent"
+import AddNewVideo from "./AdminPages/AddNewVideo"
+import UpdateVideo from "./AdminPages/UpdateVideo"
 
 export const LoginContext = createContext()
 
 function App() {
 
+<<<<<<< HEAD
   const [loginStatus, setLoginStatus] = useState(false) 
+=======
+  const [loginStatus, setLoginStatus] = useState(false)
+  //means loginstaus variable is global anyone can change this value 
+>>>>>>> 243e0a57e3ac70b15b6419eef46aaf12eb6eb9b5
   return (
     <>
       <LoginContext.Provider value={{ loginStatus, setLoginStatus }}>
@@ -44,6 +54,15 @@ function App() {
 
 
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/add-new-course" element={<AddNewCourse />} />
+          <Route path="/all-videos" element={<AllVideos />} />
+          <Route path="/all-student" element={<AllStudent />} />
+          <Route path="/add-new-video" element={<AddNewVideo />} />
+          <Route path="/update-video" element={<UpdateVideo />} />
+
+
+
+
 
         </Routes>
       </LoginContext.Provider>
@@ -53,4 +72,3 @@ function App() {
 }
 
 export default App
-    

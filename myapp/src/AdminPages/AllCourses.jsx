@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../Component/Navbar'
+import AdminNavbar from './../Component/AdminNavbar';
 import Dashboard from '../Component/Dashboard'
 
 function AllCourses() {
@@ -39,7 +39,7 @@ function AllCourses() {
 
     return (
         <>
-            <Navbar />
+            <AdminNavbar />
             <Dashboard />
 
             {/* MAIN CONTENT (shifted right to avoid dashboard overlap) */}
