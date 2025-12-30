@@ -21,7 +21,7 @@ function Home() {
 
     return (
         <>
-            <Navbar />
+            <Navbar /> 
 
             <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-blue-100 px-6 py-10">
 
