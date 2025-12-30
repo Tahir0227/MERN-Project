@@ -1,7 +1,61 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../Component/Navbar'
+import { useNavigate } from 'react-router'
+import { getProfile } from '../Services/studentServices'
+import { toast } from 'react-toastify'
+import { updateProfile } from '../Services/studentServices'
 
 export default function EditProfile() {
+
+    const navigate = useNavigate()
+    const [info, setInfo] = useState({ emial: "", profile_pic: "" });
+    const [name, setName] = useState('')
+    const [mobileNo, setMobileNo] = useState('')
+    const [password, setPassword] = useState('')
+    const [con_password, setCon_Password] = useState('')
+
+
+    const updateDetails = async (e) => {
+        e.preventDefault();
+
+        if (name.trim() === '') {
+            toast.warn('Name must be entered');
+        } else if (password.trim() === '') {
+            toast.warn('Password must be entered');
+        } else if (con_password.trim() === '') {
+            toast.warn('Password must be entered');
+        } else if (mobileNo.trim() === '') {
+            toast.warn('Mobile number must be entered');
+        } else if (password.trim() != con_password.trim()) {
+            toast.warn('Password and confirm password different');
+        } else {
+            const token = localStorage.getItem('token')
+            const result = await updateProfile(token, name, mobileNo, password);
+            console.log(result)
+            if (result.status === 'success') {
+                toast.success('update successful');
+                navigate('/profile');
+            } else {
+                toast.error('not updated');
+            }
+        }
+    }
+
+    useEffect(() => {
+        console.log('Edit-Profile component loaded')
+        loadInfo()
+    }, [])
+
+    const loadInfo = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getProfile(token)
+        if (result.status == 'success') {
+            setInfo(result.data[0])
+        }
+    }
+
+
+
     return (
         <>
             <Navbar />
@@ -27,7 +81,7 @@ export default function EditProfile() {
                             p-6 border-r">
 
                             <img
-                                src="https://via.placeholder.com/140"
+                                src={info.profile_pic}
                                 alt="profile"
                                 className="w-32 h-32 rounded-full object-cover
                            border-4 border-emerald-500 shadow-md"
@@ -53,7 +107,7 @@ export default function EditProfile() {
                                     </label>
                                     <input
                                         type="email"
-                                        value="sarthak@email.com"
+                                        value={info.emial}
                                         disabled
                                         className="w-full px-4 py-2 rounded-lg
                                border bg-gray-100 text-gray-500
@@ -67,6 +121,7 @@ export default function EditProfile() {
                                         Full Name
                                     </label>
                                     <input
+                                        onChange={(e) => setName(e.target.value)}
                                         type="text"
                                         placeholder="Enter name"
                                         className="w-full px-4 py-2 rounded-lg
@@ -81,6 +136,7 @@ export default function EditProfile() {
                                         Mobile Number
                                     </label>
                                     <input
+                                        onChange={(e) => setMobileNo(e.target.value)}
                                         type="text"
                                         placeholder="Enter mobile"
                                         className="w-full px-4 py-2 rounded-lg
@@ -95,6 +151,7 @@ export default function EditProfile() {
                                         New Password
                                     </label>
                                     <input
+                                        onChange={(e) => setPassword(e.target.value)}
                                         type="password"
                                         placeholder="New password"
                                         className="w-full px-4 py-2 rounded-lg
@@ -108,6 +165,7 @@ export default function EditProfile() {
                                         Confirm Password
                                     </label>
                                     <input
+                                        onChange={(e) => setCon_Password(e.target.value)}
                                         type="password"
                                         placeholder="Confirm password"
                                         className="w-full px-4 py-2 rounded-lg
@@ -119,6 +177,7 @@ export default function EditProfile() {
                                 {/* Save Button */}
                                 <div className="md:col-span-2 flex justify-end pt-2">
                                     <button
+                                        onClick={updateDetails}
                                         type="submit"
                                         className="bg-emerald-500 hover:bg-emerald-600
                                text-white font-semibold

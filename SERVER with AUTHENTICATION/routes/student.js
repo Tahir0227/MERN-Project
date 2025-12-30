@@ -89,4 +89,22 @@ router.get('/my-course/video/:video_id', (req, res) => {
     })
 })
 
+router.get('/myProfile', (req, res) => {
+    const email = req.headers.email
+    const sql = 'SELECT * FROM student WHERE emial = ? LIMIT 1'
+    pool.query(sql, [email], (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
+
+router.put('/updateProfile', (req, res) => {
+    const email = req.headers.email
+    const { name, mobileNo, password } = req.body
+    const sql = 'UPDATE student s JOIN users u ON s.emial = u.emial SET s.name = ?, s.mobile_no = ?, u.password = ? WHERE s.emial = ?'
+
+    pool.query(sql, [name, mobileNo, password, email], (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
+
 module.exports = router

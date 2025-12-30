@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
+import { getProfile } from '../Services/studentServices'
+import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 function MyProfile() {
+    const navigate = useNavigate()
+    const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        console.log('Profile component loaded')
+        loadInfo()
+    }, [])
+
+    const loadInfo = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getProfile(token)
+        if (result.status == 'success') {
+            setInfo(result.data[0])
+        }
+    }
+
     return (
         <>
             <Navbar />
@@ -16,13 +35,13 @@ function MyProfile() {
                         {/* LEFT: Profile Image Section */}
                         <div className="bg-emerald-500 flex flex-col items-center justify-center p-8 text-white">
                             <img
-                                src="https://via.placeholder.com/160"
+                                src={info.profile_pic}
                                 alt="profile"
                                 className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg"
                             />
 
                             <h2 className="mt-4 text-2xl font-bold">
-                                Sarthak Katkar
+                                {info.name}
                             </h2>
                             <p className="text-emerald-100">
                                 Student
@@ -41,14 +60,14 @@ function MyProfile() {
                                 <div className="flex justify-between items-center border-b pb-3">
                                     <span className="font-semibold">Email</span>
                                     <span className="text-gray-600">
-                                        sarthak@email.com
+                                        {info.emial}
                                     </span>
                                 </div>
 
                                 <div className="flex justify-between items-center border-b pb-3">
                                     <span className="font-semibold">Mobile</span>
                                     <span className="text-gray-600">
-                                        +91 98765 43210
+                                        {info.mobile_no}
                                     </span>
                                 </div>
 
@@ -57,6 +76,7 @@ function MyProfile() {
                             {/* Edit Button */}
                             <div className="mt-10">
                                 <button
+                                    onClick={() => { navigate('/edit-profile') }}
                                     className="px-8 py-3 bg-emerald-500 text-white
                                                font-semibold rounded-xl
                                                hover:bg-emerald-600 transition shadow-md"
