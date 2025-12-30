@@ -38,3 +38,11 @@ export async function getVideo(video_id, token) {
     const response = await axios.get(url, { headers })
     return response.data
 }
+
+export async function getProfile(token) {
+    const url = config.BASE_URL + '/student/myProfile'
+    const headers = { token }
+
+    const response = await axios.get(url, { headers })
+    return response.data
+}

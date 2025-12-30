@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
 
 function MyProfile() {
+
+    const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        console.log('Profile component loaded')
+        loadInfo()
+    }, [])
+
+    const loadInfo = async () => {
+        const token = localStorage.getItem('token')
+        const result = await getProfile(token)
+        if (result.status == 'success') {
+            setInfo(result.data[0])
+        }
+    }
+
     return (
         <>
             <Navbar />

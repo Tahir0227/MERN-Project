@@ -89,4 +89,12 @@ router.get('/my-course/video/:video_id', (req, res) => {
     })
 })
 
+router.get('/myProfile', (req, res) => {
+    const email = req.headers.email
+    const sql = 'SELECT * FROM student LIMIT 1'
+    pool.query(sql, [email], (error, data) => {
+        res.send(result.createResult(error, data))
+    })
+})
+
 module.exports = router
