@@ -17,6 +17,9 @@ import MyProfile from "./Pages/MyProfile"
 import CourseVideos from "./Pages/CourseVideos"
 
 import EditProfile from "./Pages/EditProfile"
+import AddNewCourse from "./AdminPages/AddNewCourse"
+import AllVideos from "./AdminPages/AllVideos"
+import AllStudent from "./AdminPages/AllStudent"
 
 export const LoginContext = createContext()
 
@@ -45,6 +48,12 @@ function App() {
 
 
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/add-new-course" element={<AddNewCourse />} />
+          <Route path="/all-videos" element={<AllVideos />} />
+          <Route path="/all-student" element={<AllStudent />} />
+
+
+
 
         </Routes>
       </LoginContext.Provider>
