@@ -16,6 +16,8 @@ import UpdateCourse from "./AdminPages/UpdateCourse"
 import MyProfile from "./Pages/MyProfile"
 import CourseVideos from "./Pages/CourseVideos"
 
+import EditProfile from "./Pages/EditProfile"
+
 export const LoginContext = createContext()
 
 function App() {
@@ -39,6 +41,10 @@ function App() {
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/update-course" element={<UpdateCourse />} />
           <Route path="/profile" element={<MyProfile />} />
+
+
+
+          <Route path="/edit-profile" element={<EditProfile />} />
 
         </Routes>
       </LoginContext.Provider>
