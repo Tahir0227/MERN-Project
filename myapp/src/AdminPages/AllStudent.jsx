@@ -141,8 +141,8 @@ function AllStudent() {
                                             </td>
                                             <td className="px-10 py-6">
                                                 <span className={`inline-flex items-center px-6 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest border-2 ${student.course_id === 'N/A'
-                                                        ? 'bg-gray-50 text-gray-400 border-gray-100'
-                                                        : 'bg-emerald-50 text-emerald-700 border-emerald-100/50'
+                                                    ? 'bg-gray-50 text-gray-400 border-gray-100'
+                                                    : 'bg-emerald-50 text-emerald-700 border-emerald-100/50'
                                                     }`}>
                                                     {getCourseName(student.course_id)}
                                                 </span>
