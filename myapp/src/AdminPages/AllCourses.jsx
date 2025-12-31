@@ -48,7 +48,7 @@ function AllCourses() {
                     </h2>
 
                     <button
-                        onClick={() => navigate(`/add-course`)}
+                        onClick={() => navigate(`/add-new-course`)}
                         className="bg-emerald-500 text-white px-5 py-2
                                    rounded-lg font-semibold hover:bg-emerald-600 transition"
                     >

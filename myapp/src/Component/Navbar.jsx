@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { LoginContext } from '../App'
+import { useContext } from 'react'
 
 function Navbar() {
+    const { loginStatus, setLoginStatus } = useContext(LoginContext)
+
     return (
         <nav className="sticky-top bg-emerald-600 w-full shadow-md">
             <div className="px-4">
@@ -47,19 +51,22 @@ function Navbar() {
                         </Link>
                     </div>
 
-                    {/* RIGHT: Logout + Mobile Dropdown */}
                     <div className="flex items-center gap-3 relative">
 
                         {/* Logout */}
-                        <Link
-                            to="/"
+                        <button
+                            onClick={() => {
+                                localStorage.clear();
+                                setLoginStatus(false)
+                                navigate("/");
+                            }}
                             className="px-4 py-2 text-sm font-semibold
-                         bg-white text-emerald-600
-                         rounded-lg hover:bg-emerald-100
-                         transition"
+                                    bg-white text-emerald-600
+                                    rounded-lg hover:bg-emerald-100
+                                    transition"
                         >
                             Logout
-                        </Link>
+                        </button>
 
                         {/* ☰ Mobile Dropdown */}
                         <div className="md:hidden dropdown">

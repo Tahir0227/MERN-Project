@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Navbar from '../Component/Navbar'
 import { getAllActiveCourses } from '../Services/userServices'
 import { useNavigate } from 'react-router'
+import { LoginContext } from '../App'
+import DefaulltNavbar from '../Component/defaultNavbar'
 
 function Home() {
 
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
+
+    const { loginStatus, setLoginStatus } = useContext(LoginContext)
 
     useEffect(() => {
         getCourses()
@@ -21,7 +25,7 @@ function Home() {
 
     return (
         <>
-            <Navbar /> 
+            {loginStatus ? <Navbar /> : <DefaulltNavbar />}
 
             <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-blue-100 px-6 py-10">
 
@@ -75,7 +79,7 @@ function Home() {
                                 {/* Course Image */}
                                 <div className="relative">
                                     <img
-                                        src="https://via.placeholder.com/400x200"
+                                        src="img1.jpg"
                                         alt="course"
                                         className="w-full h-44 object-cover"
                                     />

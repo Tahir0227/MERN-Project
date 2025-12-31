@@ -1,37 +1,37 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-function AdminNavbar() {
+function DefaulltNavbar() {
     return (
         <nav className="sticky-top bg-emerald-600 w-full shadow-md">
             <div className="px-4">
                 <div className="flex items-center justify-between h-16">
 
                     {/* LEFT: Profile */}
-                    <Link
-
-                        className="flex items-center gap-2 text-white hover:opacity-90 transition"
-                    >
-                        <span className="font-semibold hidden sm:block">
-                            Admin Portal
-                        </span>
-                    </Link>
+                    <h6>SUNBEAM</h6>
 
                     {/* CENTER: Desktop Links */}
                     <div className="hidden md:flex items-center gap-8">
                         <Link
-                            to="/admin-home"
+                            to="/home"
                             className="font-medium text-white hover:text-emerald-100 transition"
                         >
                             Home
                         </Link>
 
+                        <Link
+                            to="/home#aCourse"
+                            className="font-medium text-white hover:text-emerald-100 transition"
+                        >
+                            Available Courses
+                        </Link>
+
                     </div>
 
-                    {/* RIGHT: Logout + Mobile Dropdown */}
+                    {/* RIGHT: Login + Mobile Dropdown */}
                     <div className="flex items-center gap-3 relative">
 
-                        {/* Logout */}
+                        {/* Login */}
                         <Link
                             to="/login"
                             className="px-4 py-2 text-sm font-semibold
@@ -39,7 +39,7 @@ function AdminNavbar() {
                          rounded-lg hover:bg-emerald-100
                          transition"
                         >
-                            Logout
+                            Login
                         </Link>
 
                         {/* ☰ Mobile Dropdown */}
@@ -58,6 +58,11 @@ function AdminNavbar() {
                                         Home
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link to="/courses" className="dropdown-item">
+                                        My Courses
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
 
@@ -68,4 +73,4 @@ function AdminNavbar() {
     )
 }
 
-export default AdminNavbar
+export default DefaulltNavbar
