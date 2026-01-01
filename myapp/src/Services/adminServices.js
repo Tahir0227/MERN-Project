@@ -45,7 +45,7 @@ export async function getVideoInfo(token, video_id) {
     return response.data
 }
 
-export async function updateVideoById(token, id, title, description, youtube_url) {
+export async function updateVideoById(token, id, course_id, title, description, youtube_url) {
     const url = `${config.BASE_URL}/videos/${id}`
     const body = { course_id, title, description, youtube_url }
     const headers = { token }

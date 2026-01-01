@@ -4,47 +4,7 @@ const result = require('../utils/result')
 
 const router = express.Router()
 
-// router.post('/register-to-course', (req, res) => {
-//     const { name, email, course_id, mobile_no } = req.body
 
-//     const sql1 = 'SELECT * FROM users WHERE emial = ?'
-//     pool.query(sql1, [email], (error, data) => {
-
-//         if (error)
-//             res.send(result.createResult(error))
-
-//         else if (data.length == 0) {
-//             const sql2 = 'INSERT INTO USERS(emial,password,role) VALUES (?,?,?)'
-//             pool.query(sql2, [email, 'sunbeam', 'student'], (error, data) => {
-
-//                 const sql3 = 'INSERT INTO student(name, emial, course_id, mobile_no) VALUES(?,?,?,?)'
-//                 pool.query(sql3, [name, email, course_id, mobile_no], (error, data) => {
-//                     res.send(result.createResult(error, data))
-//                 })
-//             })
-//         }
-//         else {
-
-//             const sql4 = 'SELECT * FROM student WHERE emial = ? and course_id = ?'
-//             pool.query(sql4, [email, course_id], (error, data) => {
-//                 if (data.length == 0) {
-//                     const sql5 = 'INSERT INTO student(name, emial, course_id, mobile_no) VALUES(?,?,?,?)'
-//                     pool.query(sql5, [name, email, course_id, mobile_no], (error, data) => {
-//                         res.send(result.createResult(error, data))
-//                     })
-//                 }
-//                 else {
-//                     res.send(result.createResult('Already registerd to this course'))
-//                 }
-//             })
-
-
-
-//         }
-//     })
-
-
-// })
 
 router.put('/change-password', (req, res) => {
     const email = req.headers.email

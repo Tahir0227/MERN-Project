@@ -60,7 +60,7 @@ function EditVideo() {
     );
 
     if (result.status === "success") {
-      toast.success("Content parameters updated!");
+      toast.success("video updated!");
       navigate(-1);
     } else {
       toast.error("System Error: Update failed");
@@ -166,6 +166,7 @@ function EditVideo() {
                 </div>
 
                 <button
+                  onClick={videoUpdated}
                   type="submit"
                   className="px-16 py-5 bg-slate-950 hover:bg-emerald-600 active:scale-[0.98] text-white font-black text-xs uppercase tracking-[0.3em] rounded-[1.5rem] transition-all shadow-2xl shadow-slate-200 flex items-center justify-center gap-4 group"
                 >

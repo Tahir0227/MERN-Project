@@ -51,11 +51,6 @@ function App() {
           <Route path="/all-students" element={loginStatus ? <AllStudent /> : <Navigate to="/" />} />
           <Route path="/add-new-video" element={loginStatus ? <AddNewVideo /> : <Navigate to="/" />} />
           <Route path="/update-video/:id" element={loginStatus ? <UpdateVideo /> : <Navigate to="/" />} />
-
-
-
-
-
         </Routes>
       </LoginContext.Provider>
       <ToastContainer />

@@ -24,7 +24,7 @@ CREATE TABLE student(
     course_id int,
     mobile_no VARCHAR(20),
     profile_pic BLOB,
-    FOREIGN KEY (course_id) REFERENCES course(course_id)
+    FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
 CREATE TABLE videos(
@@ -34,7 +34,7 @@ CREATE TABLE videos(
     description varchar(50),
     youtube_url varchar(50),
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (course_id) REFERENCES course(course_id)
+    FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 );
 
 
