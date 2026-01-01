@@ -26,31 +26,31 @@ export const LoginContext = createContext()
 
 function App() {
 
-  const [loginStatus, setLoginStatus] = useState(false)
-  //means loginstaus variable is global anyone can change this value 
+  const [loginStatus, setLoginStatus] = useState(!!localStorage.getItem('token'))
+
   return (
     <>
       <LoginContext.Provider value={{ loginStatus, setLoginStatus }}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<Home />} />
           <Route path="/registerCourse/:id" element={<Register />} />
           <Route path="/course-info/:id" element={<Courseinfo />} />
-          <Route path="/my-course" element={<MyCourses />} />
-          <Route path="/my-course-info/:id" element={<MySelectedCourse />} />
-          <Route path="/my-course/videos/:id" element={<CourseVideos />} />
+          <Route path="/my-course" element={loginStatus ? <MyCourses /> : <Navigate to="/" />} />
+          <Route path="/my-course-info/:id" element={loginStatus ? <MySelectedCourse /> : <Navigate to="/" />} />
+          <Route path="/my-course/videos/:id" element={loginStatus ? <CourseVideos /> : <Navigate to="/" />} />
 
-          <Route path="/admin-home" element={<AdminHome />} />
-          <Route path="/all-courses" element={<AllCourses />} />
-          <Route path="/update-course/:id" element={<UpdateCourse />} />
-          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/admin-home" element={loginStatus ? <AdminHome /> : <Navigate to="/" />} />
+          <Route path="/all-courses" element={loginStatus ? <AllCourses /> : <Navigate to="/" />} />
+          <Route path="/update-course/:id" element={loginStatus ? <UpdateCourse /> : <Navigate to="/" />} />
+          <Route path="/profile" element={loginStatus ? <MyProfile /> : <Navigate to="/" />} />
 
-          <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/add-new-course" element={<AddNewCourse />} />
-          <Route path="/all-videos" element={<AllVideos />} />
-          <Route path="/all-students" element={<AllStudent />} />
-          <Route path="/add-new-video" element={<AddNewVideo />} />
-          <Route path="/update-video/:id" element={<UpdateVideo />} />
+          <Route path="/edit-profile" element={loginStatus ? <EditProfile /> : <Navigate to="/" />} />
+          <Route path="/add-new-course" element={loginStatus ? <AddNewCourse /> : <Navigate to="/" />} />
+          <Route path="/all-videos" element={loginStatus ? <AllVideos /> : <Navigate to="/" />} />
+          <Route path="/all-students" element={loginStatus ? <AllStudent /> : <Navigate to="/" />} />
+          <Route path="/add-new-video" element={loginStatus ? <AddNewVideo /> : <Navigate to="/" />} />
+          <Route path="/update-video/:id" element={loginStatus ? <UpdateVideo /> : <Navigate to="/" />} />
 
 
 
@@ -63,4 +63,4 @@ function App() {
   )
 }
 
-export default App
+export default App  

@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router'
+import { useContext } from 'react'
+import { LoginContext } from '../App'
+import { useNavigate } from 'react-router'
 
 function Navbar() {
+    const { loginStatus, setLoginStatus } = useContext(LoginContext)
+    const navigate = useNavigate()
+
     const location = useLocation();
 
     // Helper to check if link is active
@@ -66,12 +72,17 @@ function Navbar() {
 
                         <div className="h-8 w-px bg-white/20 hidden md:block"></div>
 
-                        <Link
-                            to="/"
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem('token');
+                                setLoginStatus(false);
+                                navigate("/")
+                            }}
                             className="px-5 py-2 text-xs font-black text-white uppercase tracking-[0.2em] bg-red-500/80 hover:bg-red-600 rounded-xl transition shadow-lg shadow-red-900/20"
                         >
                             Logout
-                        </Link>
+                        </button>
+
 
                         {/* Mobile Menu Icon (Hamburger) */}
                         <div className="md:hidden">

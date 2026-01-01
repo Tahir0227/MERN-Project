@@ -24,7 +24,7 @@ const LoginForm = () => {
                 localStorage.setItem('token', result.data.token)
                 setLoginStatus(true)
                 toast.success('Login successful');
-                navigate('/home');
+                (result.data.role == "admin") ? navigate('/admin-home') : navigate('/home')
             } else {
                 toast.error('Invalid credentials');
             }

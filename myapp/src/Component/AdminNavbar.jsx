@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router'
+import { useContext } from 'react'
+import { LoginContext } from '../App'
+import { useNavigate } from 'react-router'
 
 function AdminNavbar() {
+
+    const { loginStatus, setLoginStatus } = useContext(LoginContext)
+    const navigate = useNavigate()
     const location = useLocation();
 
     // Helper to check if link is active
@@ -15,23 +21,12 @@ function AdminNavbar() {
                     {/* LEFT CORNER: Admin Identity */}
                     <div className="flex items-center">
                         <Link
-                            to="/profile"
+
                             className="flex items-center gap-4 bg-white/10 hover:bg-white/20 transition px-4 py-2 rounded-2xl border border-white/10 group shadow-sm"
                         >
-                            <div className="relative">
-                                <img
-                                    src="https://via.placeholder.com/36"
-                                    alt="profile"
-                                    className="w-10 h-10 rounded-full object-cover border-2 border-emerald-400 group-hover:scale-105 transition-transform"
-                                />
-                                <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-emerald-600 rounded-full"></div>
-                            </div>
                             <div className="hidden sm:block">
-                                <span className="block text-[9px] font-black text-emerald-100 uppercase tracking-[0.3em] leading-none mb-1">
-                                    System Admin
-                                </span>
                                 <span className="block text-sm font-bold text-white leading-none">
-                                    Settings
+                                    Admin Portal SUNBEAM
                                 </span>
                             </div>
                         </Link>
@@ -68,15 +63,19 @@ function AdminNavbar() {
                         <div className="h-8 w-px bg-white/20 hidden md:block"></div>
 
                         {/* Logout Button - Anchored to right corner */}
-                        <Link
-                            to="/"
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem('token');
+                                setLoginStatus(false);
+                                navigate("/home");
+                            }}
                             className="flex items-center gap-2 px-6 py-2.5 text-[11px] font-black text-white uppercase tracking-[0.3em] bg-red-500/80 hover:bg-red-600 rounded-xl transition-all shadow-xl shadow-red-900/20 group hover:-translate-y-0.5"
                         >
                             <span>Logout</span>
                             <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 16l4-4m0 0l-4-4m4 4H7" />
                             </svg>
-                        </Link>
+                        </button>
 
                         {/* Mobile Toggle */}
                         <div className="md:hidden">

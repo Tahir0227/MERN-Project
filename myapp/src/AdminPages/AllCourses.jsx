@@ -60,7 +60,7 @@ function AllCourses() {
                         </div>
 
                         <button
-                            onClick={() => navigate(`/add-course`)}
+                            onClick={() => navigate(`/add-new-course`)}
                             className="bg-slate-950 hover:bg-emerald-600 text-white px-12 py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.3em] transition-all shadow-2xl shadow-slate-300 flex items-center gap-4 active:scale-95 group"
                         >
                             <svg className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4" /></svg>

@@ -28,9 +28,11 @@ router.post('/auth/login', (req, res) => {
                 email: user.emial,
                 role: user.role
             }
+            const role = user.role
             const token = jwt.sign(payload, config.SECRET)
             const userData = {
-                token
+                token,
+                role
             }
 
             res.send(result.createResult(null, userData))

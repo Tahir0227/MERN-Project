@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Component/Navbar'
 import { getAllActiveCourses } from '../Services/userServices'
 import { useNavigate } from 'react-router'
+import { useContext } from 'react'
+import { LoginContext } from '../App'
+import DefaulltNavbar from '../Component/DefaultNavbar'
 
 function Home() {
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
-
+    const { loginStatus, setLoginStatus } = useContext(LoginContext)
     useEffect(() => {
         getCourses()
     }, [])
@@ -20,7 +23,7 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#f8fafc] text-gray-900 font-sans">
-            <Navbar />
+            {loginStatus ? <Navbar /> : <DefaulltNavbar />}
 
             {/* ================= HERO SECTION ================= */}
             <section className="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-blue-600 py-24 px-6">
